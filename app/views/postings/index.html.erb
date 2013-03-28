@@ -1,0 +1,37 @@
+
+
+<table>
+  <tr>
+    <th>Post</th>
+    <th>Image</th>
+    <th>Video</th>
+    <th>User</th>
+    <th>Posted on</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @postings.each do |posting| %>
+  <tr>
+    <td><%= posting.post %></td>
+    <td><%= image_tag posting.image_url, :size=>'50x50' %></td>
+    <td><%= posting.video %></td>
+    <td><%= posting.user_id %></td>
+    <td><%= posting.post_on %></td>
+    <td><%= link_to 'Comment', posting_comments_path(posting) %></td>
+    <td><%= link_to 'Show', posting %></td>
+    <td><%= link_to 'Edit', edit_posting_path(posting) %></td>
+    <td><%= link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<!--
+<%# @activities.each do |activity| %>
+  <%#= render_activity(activity, :layout => :activity) %>
+<%# end %>
+<br />-->
+<%if current_user%>
+<%= link_to 'New Posting', new_posting_path %>
+<%end%>

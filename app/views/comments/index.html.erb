@@ -1,0 +1,60 @@
+<h1>Listing comments</h1>
+<ul class="thumbnails">
+  <li class="span4">
+    <a href="#" class="thumbnail">
+      <%= image_tag @posting.image_url, :size=>'300x200'%>
+    </a>
+    <h3><%= @posting.post%></h3>
+    <b>BY:</b><%= @user.name%><br>
+    <b>On:</b><%= @posting.post_on%>
+
+  </li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+<%= link_to 'New Comment', new_posting_comment_path(@posting) %>
+<div class='main-area span12'>
+  <br>
+  <% @comments.each do |comment| %>
+    <div class='span3'>
+      <%= User.select(:name).where(:uid=>comment.user_id)[0].name %><br>
+      <%= comment.commented_on %>
+    </div>
+    <div class='span9'>
+      <%= comment.content %>
+    </div>
+    <div class='clearfix'></div>
+    <hr>
+<% end %>
+</div>
+
+
+
+<!-- <table>
+  <tr>
+    <th>Content</th>
+    <th>User</th>
+    <th>Commented on</th>
+    <th>Posting</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @comments.each do |comment| %>
+  <tr>
+    <td><%= comment.content %></td>
+    <td><%= comment.user_id %></td>
+    <td><%= comment.commented_on %></td>
+    <td><%= comment.posting_id %></td>
+    <td><%= link_to 'Show', posting_comment_path(@posting,comment) %></td>
+    <td><%= link_to 'Edit', edit_posting_comment_path(@posting,comment) %></td>
+    <td><%= link_to 'Destroy', posting_comment_path(@posting,comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table> -->
+
+<br />
+<%= link_to "back",postings_path%>
+

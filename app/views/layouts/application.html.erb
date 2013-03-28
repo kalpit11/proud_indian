@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShameIndia</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Shame India</a>
+    <ul class="nav pull-right">
+    	<% if current_user %>
+    		<li><a href="#">Welcome <%= current_user.name %>!</a></li>
+    		<li><a href="<%=signout_path%>">Logout</a></li>
+    	<%else%>
+      	<li><a href="/auth/facebook">Login with Facebook</a></li>
+      	<li><a href="/auth/twitter">Login with Twitter</a></li>
+      <%end%>
+    </ul>
+  </div>
+</div>
+<div class='span10'>
+	<%= yield %>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Post:</b>
+  <%= @posting.post %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= image_tag @posting.image_url, :size=>'100x100' %>
+</p>
+
+<p>
+  <b>Video:</b>
+  <%= @posting.video %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @posting.user_id %>
+</p>
+
+<p>
+  <b>Posted on:</b>
+  <%= @posting.post_on %>
+</p>
+
+
+<%= link_to 'Edit', edit_posting_path(@posting) %> |
+<%= link_to 'Back', postings_path %>
