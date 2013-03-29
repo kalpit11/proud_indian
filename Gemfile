@@ -30,6 +30,8 @@ gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 gem 'pry'
 gem 'public_activity'
+gem "thin"
+gem "unicorn"
 gem "heroku"
 
 
