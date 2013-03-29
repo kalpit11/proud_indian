@@ -18,7 +18,7 @@
   <br>
   <% @comments.each do |comment| %>
     <div class='span3'>
-      <%= User.select(:name).where(:uid=>comment.user_id)[0].name %><br>
+      <%= comment.user_name %><br>
       <%= comment.commented_on %>
     </div>
     <div class='span9'>

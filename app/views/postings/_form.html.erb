@@ -20,10 +20,15 @@
     <%= f.file_field :image,:class =>'span6' %><br />
   </div>
   <div class="field">
+    <%= f.label :caption %>
+    <%= f.text_field :caption,:class =>'span6' %><br />
+  </div>
+  <div class="field">
     <%= f.label :video %>
     <%= f.text_field :video,:class =>'span6' %><br />
   </div>
   <%=f.hidden_field :user_id, :value=>current_user.uid%>
+  <%=f.hidden_field :user_name, :value=>current_user.name%>
   <%=f.hidden_field :post_on, :value=>Time.now%>
   <div class="actions">
     <%= f.submit :class=>'btn btn-success' %>

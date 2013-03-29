@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         @comment.create_activity :create, owner: current_user
-        format.html { redirect_to posting_comments_path(@posting), notice: 'Comment was successfully created.' }
+        format.html { redirect_to root_url, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }

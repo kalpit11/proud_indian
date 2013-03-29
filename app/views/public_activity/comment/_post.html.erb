@@ -1,0 +1,9 @@
+<%= @post.user_name%>
+<%= @post.posted_on%>
+<%= image_tag(@post.image, :size=>'300x200'%>
+<%= @post.post%>
+<% @post.comments.all.each do |comment| %>
+	<%= comment.user_name%>
+	<%= comment.commented_on%>
+	<%= comment.content%>
+<%end%>

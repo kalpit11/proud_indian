@@ -2,7 +2,7 @@ ShameIndia::Application.routes.draw do
    
 
 
-  get "activities/index"
+
 
   #devise_for :users
 
@@ -11,7 +11,7 @@ ShameIndia::Application.routes.draw do
   end
 
   resources :activities
-  root :to => 'postings#index'
+  root :to => "activities#index"
   match "auth/:provider/callback" => 'sessions#create'
   match "/signout" => "sessions#destroy", :as => :signout
 

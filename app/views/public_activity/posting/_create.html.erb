@@ -1,7 +1,23 @@
 added a post
-
 <% if activity.trackable %>
-  <%= link_to activity.trackable.name, activity.trackable %>
+  <%post = activity.trackable %>
+  <ul class="thumbnails">
+  	<li><%= post.post_on%></li>
+  	<div class='clearfix'></div>
+	  <li class="span4">
+	    <div class="thumbnail">
+	      <%= image_tag(post.image_url,:size=>'300x200')%>
+	      <h3><%= post.caption%></h3>
+	      <p><%= post.post%></p>
+	    </div>
+	  </li>
+	  <div class='clearfix'></div>
+	  <li><%= link_to "Add Comment", new_posting_comment_path(post)%></li>
+	</ul>
+
+  
+  
+  <br>
 <% else %>
-  which has since been removed
+  which has since been removed<br>
 <% end %>

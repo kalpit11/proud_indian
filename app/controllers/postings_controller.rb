@@ -45,7 +45,7 @@ class PostingsController < ApplicationController
     respond_to do |format|
       if @posting.save
         @posting.create_activity :create, owner: current_user
-        format.html { redirect_to @posting, notice: 'Posting was successfully created.' }
+        format.html { redirect_to root_url, notice: 'Posting was successfully created.' }
         format.json { render json: @posting, status: :created, location: @posting }
       else
         format.html { render action: "new" }

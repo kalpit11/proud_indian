@@ -16,6 +16,7 @@
     <%= f.text_area :content, :cols => 30, :rows => 5,:class =>'span6' %>
   </div>
   <%=f.hidden_field :user_id, :value=>current_user.uid%>
+  <%=f.hidden_field :user_name, :value=>current_user.name%>
   <%=f.hidden_field :posting_id, :value=>@posting.id%>
   <%=f.hidden_field :commented_on, :value=>Time.now%>
   <div class="actions">
