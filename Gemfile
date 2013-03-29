@@ -30,6 +30,7 @@ gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 gem 'pry'
 gem 'public_activity'
+gem "heroku"
 
 
 # To use ActiveModel has_secure_password
