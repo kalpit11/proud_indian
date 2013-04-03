@@ -1,0 +1,3 @@
+$('recent-activitie').html('<%= escape_javascript (@activities) %>');
+ 
+$('#paginator').html('<%= escape_javascript(paginate(@activities, :remote => true).to_s) %>');

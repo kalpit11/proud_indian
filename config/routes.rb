@@ -9,9 +9,9 @@ ShameIndia::Application.routes.draw do
   resources :postings do
     resources :comments
   end
-
+  match "/postings/:posting_id/comments" => "comments#create", :as => 'create_comment'
   resources :activities
-  root :to => "activities#index"
+  root :to => "postings#index"
   match "auth/:provider/callback" => 'sessions#create'
   match "/signout" => "sessions#destroy", :as => :signout
 

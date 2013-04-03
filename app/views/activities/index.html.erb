@@ -7,5 +7,6 @@
 
   <%= activity.owner.name if activity.owner %>
   <%#= activity.trackable.comment%>
-  <%= render_activity activity %>
+  <%#binding.pry%>
+  <%= render_activity activity, :locals => {:current_user => current_user} %>
 <% end %>

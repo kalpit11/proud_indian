@@ -2,8 +2,8 @@ class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
   def index
-    @postings = Posting.all
-
+    @postings = Posting.order("created_at desc")
+    @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(5)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @postings }
@@ -40,6 +40,7 @@ class PostingsController < ApplicationController
   # POST /postings
   # POST /postings.json
   def create
+    #binding.pry
     @posting = Posting.new(params[:posting])
 
     respond_to do |format|
@@ -61,7 +62,7 @@ class PostingsController < ApplicationController
 
     respond_to do |format|
       if @posting.update_attributes(params[:posting])
-        format.html { redirect_to @posting, notice: 'Posting was successfully updated.' }
+        format.html { redirect_to @root_url, notice: 'Posting was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -77,7 +78,7 @@ class PostingsController < ApplicationController
     @posting.destroy
 
     respond_to do |format|
-      @posting.create_activity :destroy, owner: current_user
+      #@posting.create_activity :destroy, owner: current_user
       format.html { redirect_to postings_url }
       format.json { head :no_content }
     end

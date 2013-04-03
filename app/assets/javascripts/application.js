@@ -14,4 +14,19 @@
 //= require bootstrap
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require jquery_nested_form
 //= require_tree .
+
+$(document).ready(function() {
+
+	// $(".comment").hide();
+	// $(".commit_submit").click(function(){
+	//    $(".comment").toggle();
+	//  });
+	$("#new_comment").bind('ajax:success',function(event){
+		$(this).closest('.comment').html("<%= escape_javascript(@comment.content) %>").fadeIn("slow");
+	});
+  $('a#comment').click(function(){
+    $(this).closest('.comment-area').toggle();
+  });
+})
