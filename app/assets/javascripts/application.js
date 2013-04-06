@@ -23,10 +23,34 @@ $(document).ready(function() {
 	// $(".commit_submit").click(function(){
 	//    $(".comment").toggle();
 	//  });
-	$("#new_comment").bind('ajax:success',function(event){
-		$(this).closest('.comment').html("<%= escape_javascript(@comment.content) %>").fadeIn("slow");
+	$(".new_comment").bind('ajax:success',function(evt, data, status, xhr){
+			var data_id = $(this).find('input[type=submit]').data("id");
+			console.log("success");
+			$("."+data_id).children(".new_comment").before(data).fadeIn("slow");	
+		}).bind("ajax:error",function() {
+
 	});
+
+	$(".comment-area").delegate("a", "click",'ajax:success',function(evt, data, status, xhr){
+			$(this).parent().parent().fadeOut();
+		}).bind("ajax:error",function() {
+	});
+
+	$(".like_post").bind('ajax:success',function(evt, data, status, xhr){
+			$(this).parent().parent().fadeOut();
+		}).bind("ajax:error",function() {
+			
+	});
+
+
+	$(".poll_form").bind('ajax:success',function(evt, data, status, xhr){
+			$(this).parent().fadeOut();
+		}).bind("ajax:error",function() {
+			
+	});
+	
   $('a#comment').click(function(){
-    $(this).closest('.comment-area').toggle();
-  });
+	    $(this).parent().siblings(".comment-area").toggle("slow");
+	  });
+  
 })

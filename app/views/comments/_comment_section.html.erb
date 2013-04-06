@@ -1,0 +1,19 @@
+<div class='row-fluid'>
+  <div class='span10'>
+    <b><%= comment.user_name %></b>
+    <%= comment.content %>
+  </div>
+	<%if current_user %>
+		<%if current_user.id == comment.user_id %>
+			<div class='span2'>
+				<%= link_to image_tag('edit.png',:size=>'10x16'),edit_posting_comment_path(posting,comment) %>
+				<%= link_to image_tag('delete.png',:size=>'10x16'),posting_comment_path(posting,comment), :method =>:delete, :remote=>true,:class=>"delete_comment","data-id"=>"comment-area-#{posting.id}comment-area-#{posting.id}"%>
+			</div>
+		<%end%>
+	<%end%>
+	<div class="clearfix" ></div>
+	<hr style="width: 87%;">
+</div>
+
+
+  

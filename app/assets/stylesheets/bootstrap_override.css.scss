@@ -1,34 +1,41 @@
 @import "bootstrap";
 
-.row-fluid{
-	margin-left: 20px
+.modal-body{
+  max-height: 500px;
+}
+.page{
+	margin-left: 1%;
+  margin-top: 2%;
+   margin-bottom: 4%;
 }
 #footer {
-    height: 60px;
-    background-color:rgb(27, 71, 112);
-    margin-left: -20px;
-    box-shadow: rgb(0, 0, 0) 0 0 16px;
-		color: white;
+  height: 60px;
+  background-color:rgb(27, 71, 112);
+  margin-left: 0px;
+  box-shadow: rgb(0, 0, 0) 0 0 6px;
+	color: white;
 }
 
 .main-area{
-    border-right: solid 1px;
-    border-left: solid 1px;
-    border-color: ghostwhite;
-    padding-left: 20px;
-    box-shadow: #777 0 0 5px;
+  border-right: solid 1px;
+  border-left: solid 1px;
+  border-color: ghostwhite;
+  padding-left: 20px;
+  box-shadow: #777 0 0 5px;
 }
 
 .search-area{
-	    margin-top: 25px;
+	margin-top: 25px;
 
 }
 .search-area hr{
 	margin: 10px 0 10px -20px;;
 }
 
-.recent-activities{
-	
-    margin-top: 25px;
-
+.side-bar{
+	margin-top: 25px;
+}
+.new_edit_posting{
+  margin-top: 4%;
+  margin-left: 1%;
 }

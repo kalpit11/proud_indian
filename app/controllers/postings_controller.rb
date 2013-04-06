@@ -1,9 +1,21 @@
 class PostingsController < ApplicationController
   # GET /postings
   # GET /postings.json
+
+  # def texting
+  #   render :text => "I'm just printing a dummy text"
+  # end
+    
   def index
-    @postings = Posting.order("created_at desc")
+    #binding.pry
+    if params[:search] 
+      @postings = Posting.where(:caption=>params[:search][:caption])
+    else
+      @postings = Posting.order("created_at desc")
+    end
     @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(5)
+    @poll = Poll.where(:dated=>Date.today)[0]
+    @poll_answer = @poll.poll_answers.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @postings }
@@ -62,7 +74,7 @@ class PostingsController < ApplicationController
 
     respond_to do |format|
       if @posting.update_attributes(params[:posting])
-        format.html { redirect_to @root_url, notice: 'Posting was successfully updated.' }
+        format.html { redirect_to postings_path, notice: 'Posting was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -82,5 +94,18 @@ class PostingsController < ApplicationController
       format.html { redirect_to postings_url }
       format.json { head :no_content }
     end
+  end
+
+  def add_like
+    @posting = Posting.find(params[:posting_id])
+    @post_like = @posting.post_likes.new(:user_id=>current_user.id,:user_name=>current_user.name,:posting_id=>params[:posting_id])
+    if @post_like.save
+      @post_like.create_activity :create, owner: current_user
+      redirect_to postings_path
+    end
+  end
+
+  def update_poll
+
   end
 end

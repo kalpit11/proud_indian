@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403061455) do
+ActiveRecord::Schema.define(:version => 20130405075421) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130403061455) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
-    t.string   "user_id"
+    t.integer  "user_id"
     t.datetime "commented_on"
     t.integer  "posting_id"
     t.datetime "created_at",   :null => false
@@ -47,8 +47,23 @@ ActiveRecord::Schema.define(:version => 20130403061455) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "poll_answers", :force => true do |t|
+    t.string   "answer"
+    t.integer  "poll_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "polls", :force => true do |t|
+    t.text     "question"
+    t.date     "dated"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "post_likes", :force => true do |t|
-    t.string   "user_id"
+    t.integer  "user_id"
     t.string   "user_name"
     t.integer  "posting_id"
     t.datetime "created_at", :null => false
@@ -59,11 +74,11 @@ ActiveRecord::Schema.define(:version => 20130403061455) do
     t.text     "post"
     t.string   "video"
     t.datetime "post_on"
-    t.string   "user_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "user_name"
     t.string   "caption"
+    t.string   "user_name"
   end
 
   create_table "users", :force => true do |t|
