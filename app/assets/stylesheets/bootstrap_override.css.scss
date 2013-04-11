@@ -22,6 +22,7 @@
   border-color: ghostwhite;
   padding-left: 20px;
   box-shadow: #777 0 0 5px;
+  padding-bottom: 1%;
 }
 
 .search-area{
@@ -38,4 +39,16 @@
 .new_edit_posting{
   margin-top: 4%;
   margin-left: 1%;
+}
+.comment-area{
+  background-color: ghostwhite;
+box-shadow: rgb(0, 0, 0) 0 0 2px;
+padding-left: 1%;
+padding-top: 1%;
+}
+.new-comment{
+  padding-top: 1%;
+}
+.post-area{
+  margin-top: 4%;
 }

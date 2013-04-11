@@ -4,12 +4,11 @@
     <div class="search-area">
       <%= form_tag(postings_path,:method=>:get) do%>
         <%if current_user%>
-      <a href="#new_post" data-toggle="modal" class="btn" >Post</a>
-      <%end%>
+          <a href="#new_post" data-toggle="modal" class="btn" >Post</a>
+        <%end%>
         <%=text_field_tag "search[caption]",(params[:search].present? ? params[:search][:caption]: ''), :class=>"input-medium search-query span6", :placeholder=>"Search"%>
         <%=submit_tag "Search" , :class=>'btn btn-info'%>
       <% end %>
-      <hr>
 
             <!-- Modal -->
       <div id="new_post" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -30,29 +29,36 @@
     </div>
     
     <%@postings.each do |posting|%>
-      <div id="post_<%=posting.id%>">
-        <%if current_user%>
+      <hr style="margin-left: -1%;margin-right: 1%;">
+      <div id="post_<%=posting.id%>" class="post-area">
+        <ul class="thumbnails">
+          <div class="span1">
+            <%img=User.where(:id => posting.user_id)[0]%>
+            <%= image_tag(img.image_url)%>
+            <h6><%= posting.user_name%></h6>
+          </div>  
+          <div class="span10">
+            
+            <h3><%= posting.caption%></h3>
+            <%@pictures = posting.pictures%>
+            <%@pictures.each do |picture|%>
+              <li class="span4">
+                <div class="thumbnail">
+                  <a href="#picture_view-<%=posting.id%>" data-toggle="modal"><%= image_tag(picture.image_url,:style=>"width:300px;height:200px;")%></a>
+                </div>
+              </li>
+            <%end%>
+
+            <li class="span12"><p style="color: gray;"><%= posting.post%></p></li>
+          </div>  
+          <%if current_user%>
           <%if current_user.id==posting.user_id%>
-            <div class="offset11">
+            <div class="span1">
               <%= link_to image_tag("edit.png",:size=>"10x16"),edit_posting_path(posting)%>
               <%= link_to image_tag("delete.png",:size=>"10x16"),posting_path(posting), :method =>:delete%>
             </div>
           <%end%>  
         <%end%>
-        <div class="clearfix"></div>
-        <ul class="thumbnails">
-          <h5><%= posting.user_name%></h5>
-          <h3><%= posting.caption%></h3>
-          <%@pictures = posting.pictures%>
-          <%@pictures.each do |picture|%>
-            <li class="span4">
-              <div class="thumbnail">
-                <a href="#picture_view-<%=posting.id%>" data-toggle="modal"><%= image_tag(picture.image_url,:style=>"width:300px;height:200px;")%></a>
-              </div>
-            </li>
-          <%end%>
-
-
                     <!-- Modal -->
           <div id="picture_view-<%=posting.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
@@ -71,7 +77,7 @@
                 <%end%>
 
               </div>
-              <p style="color: gray;"><%= posting.post%></p>  
+                
               <!-- Carousel nav -->
               <a class="carousel-control left" href="#myCarousel-<%=posting.id%>" data-slide="prev">&lsaquo;</a>
               <a class="carousel-control right" href="#myCarousel-<%=posting.id%>" data-slide="next">&rsaquo;</a>
@@ -87,27 +93,29 @@
 
 
 
-          <div class="clearfix"></div>
-          <p style="color: gray;"><%= posting.post%></p>          
+          <div class="clearfix"></div>         
         </ul>
         <%#binding.pry%>
-        <%if current_user%>
-          <b class="like"><%=posting.post_likes.count%></b>&nbsp;
-          <%if posting.post_likes.select{|c|c.user_id == current_user.id}.empty?%>
-            <%= link_to "Like",add_like_path(posting),:class=>"like_post", :remote=>true%>
-          <%else%>
-            <a href="#">Likes</a>
-          <%end%>
+        <div class="share-area offset1">
+          <%if current_user%>
+            <b class="like"><%=posting.post_likes.count%></b>&nbsp;
+            <%if posting.post_likes.select{|c|c.user_id == current_user.id}.empty?%>
+              <%= link_to "Like",add_like_path(posting),:class=>"like_post"%>
+            <%else%>
+              &nbsp;<a href="#">Like</a>
+            <%end%>
 
-          |<a href="#" id='comment'>Comment</a>|<a href="#" onclick='postToFeed("<%=posting.caption%>","<%=posting.post%>","<%=posting.pictures[0].image_url.to_s%>"); return false;' data-id="<%=posting.id%>">Share</a>
-          <%= link_to "tweet me", "http://twitter.com/home?status=#{posting.caption} See complete story on www.shameIndia.com"%>
-        <%end%>  
+            <!-- <a href="#" id='comment'>&nbsp;<%=image_tag("comment.ico",:size=>"30x20")%>&nbsp;&nbsp;</a> --><a href="#" onclick='postToFeed("<%=posting.caption%>","<%=posting.post%>","<%=posting.pictures[0].image_url.to_s%>"); return false;' data-id="<%=posting.id%>"><%=image_tag("fb1.png",:size=>"30x20")%></a>&nbsp;
+            <%= link_to image_tag("twitter1.png",:size=>"30x20"), "http://twitter.com/home?status=#{posting.caption} See complete story on www.shameIndia.com"%>
+          <%end%>
+        </div>    
       </div>
       <br>
-      <div class='span12 comment-area-<%=posting.id%> comment-area'>
-        <hr style="margin: 20px 38px 20px -25px;">
+      <div class='span10 offset1 comment-area-<%=posting.id%> comment-area'>
+        <!-- <hr style="margin: 20px 38px 20px -25px;"> -->
+        <%= render :partial => "comments/comment_section",:collection => posting.comments , :as => :comment,:locals => {:posting => posting } %>
         <%if current_user%>
-          <%=form_for([posting,@comment=posting.comments.new],:remote => true, :html => {:class=>"new-comment-#{posting.id} new_comment","data-type" => "html"}) do |f|%>
+          <%=form_for([posting,@comment=posting.comments.new],:remote => true, :html => {:class=>"new-comment-#{posting.id} new_comment","data-type" => "html","style"=>"margin-left: 5%;"}) do |f|%>
             <%=f.text_field :content,:style=>"margin-bottom: 0px;"%>
             <%=f.hidden_field :user_id, :value=>current_user.id%>
             <%=f.hidden_field :user_name, :value=>current_user.name%>
@@ -115,9 +123,8 @@
             <%=f.submit "Add Comment",:class=>"btn btn-success","data-id"=>"comment-area-#{posting.id}" %><br>
           <%end%>
         <%end%>
-        <hr style="width: 87%;">
-        <%= render :partial => "comments/comment_section",:collection => posting.comments , :as => :comment,:locals => {:posting => posting } %>
-      </div>      
+      </div>   
+      <div class="clearfix"></div>   
     <%end%>
   </div>  
   <div class='side-bar span3 fixed'>
@@ -169,7 +176,7 @@
         
         obj = {
           method: 'feed',
-          redirect_uri: 'http://localhost:3000/',
+          
           link: 'https://localhost:3000',
           picture: 'http://localhost:3000'+url,
           name: 'India',
