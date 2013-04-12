@@ -1,5 +1,5 @@
 <%=form_for([posting,@comment=posting.comments.new],:remote => true, :html => {:class=>"new-comment-#{posting.id} new_comment","data-type" => "html","style"=>"margin-left: 5%;"}) do |f|%>
-  <%=f.text_area :content,:style=>"margin-bottom: 0px;", :rows => 5%>
+  <%=f.text_area :content,:style=>"margin-bottom: 0px;", :rows => 3%>
   <%=f.hidden_field :user_id, :value=>current_user.id%>
   <%=f.hidden_field :user_name, :value=>current_user.name%>
   <%=f.hidden_field :commented_on, :value=>Time.now%>
