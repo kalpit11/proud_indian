@@ -7,7 +7,27 @@
   <%= csrf_meta_tags %>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "0d7bdf41-6d77-4204-8ba4-dc93a9941c33", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
- <script src='http://connect.facebook.net/en_US/all.js'></script>
+<script src='http://connect.facebook.net/en_US/all.js'></script>
+<script> 
+  FB.init({appId: "140476016130992", status: true, cookie: true});
+  function postToFeed(capt,post,url) {
+    // calling the API ...
+    obj = {
+      method: 'feed',
+      link: 'https://indianpost18041.fwd.wf',
+      picture: 'http://indianpost18041.fwd.wf'+url,
+      name: 'India',
+      caption: capt,
+      description: post
+    };
+    function callback(response) {
+      document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+    }
+    FB.ui(obj, callback);
+  }
+</script>
+
+
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
@@ -25,7 +45,7 @@
     </ul>
   </div>
 </div>
-
+<div id='fb-root'></div>
 	<%= yield %>
   <br>
 <div class="navbar-static-bottom" id="footer">
