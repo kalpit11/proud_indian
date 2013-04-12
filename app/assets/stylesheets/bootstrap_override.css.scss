@@ -1,5 +1,7 @@
 @import "bootstrap";
-
+body{
+  /*background-image:url("bg1.jpg");*/
+}
 .modal-body{
   max-height: 500px;
 }
@@ -52,3 +54,7 @@ padding-top: 1%;
 .post-area{
   margin-top: 4%;
 }
+/*.side-bar{
+  margin-left: 1%;
+  padding-right: 0%;
+}*/

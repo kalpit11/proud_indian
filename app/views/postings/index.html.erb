@@ -127,7 +127,7 @@
       <div class="clearfix"></div>   
     <%end%>
   </div>  
-  <div class='side-bar span3 fixed'>
+  <div class='side-bar span3 fixed' style="margin-left:1%;">
     <div class="recent-activities">
       <%if not current_user%>
         <a href="/auth/facebook"><%= image_tag "fb.png" %></a><br><br>
@@ -138,24 +138,42 @@
       <%= activity.owner.name if activity.owner %>
       <%= render_activity activity %>
       <% end %>
-      <hr>
+      
     </div>
 
     <%if current_user%>
-      <%if @poll.poll_answers.select{|c| c.user_id == current_user.id}.empty?%>  
-        <div class="polling">
-          <%#binding.pry%>
-          <%=form_for @poll_answer,:url=>create_poll_answer_path(@poll),:remote=>true,:html => {:class=>"poll_form","data-type" => "html"} do |f|%>
-            <%= @poll.question%><br>
-            <%= f.hidden_field :user_id,:value => current_user.id%>
-            <%= f.radio_button :answer,"Yes"%>Yes<br>
-            <%= f.radio_button :answer,"No"%>No<br>
-            <%= f.radio_button :answer,"Can't_Say"%>Can't Say<br><br>
-            <%= f.submit "Submit"%>
-          <%end%>
-        </div>
+      <%if @poll%>  
+        <%if @poll.poll_answers.select{|c| c.user_id == current_user.id}.empty?%>  
+          <div class="polling">
+            <%#binding.pry%>
+            <hr>
+            <%=form_for @poll_answer,:url=>create_poll_answer_path(@poll),:remote=>true,:html => {:class=>"poll_form","data-type" => "html"} do |f|%>
+              <%= @poll.question%><br>
+              <%= f.hidden_field :user_id,:value => current_user.id%>
+              <%= f.radio_button :answer,"Yes"%>Yes<br>
+              <%= f.radio_button :answer,"No"%>No<br>
+              <%= f.radio_button :answer,"Cant_Say"%>Can't Say<br><br>
+              <%= f.submit "Submit"%>
+            <%end%>
+          </div>
+        <%end%>
       <%end%>
     <%end%>  
+    <div class="poll-result">
+      <%if @previous_poll%>
+        <hr>
+        Yesterday's Poll result:<br>
+        <div class="progress progress-success">
+          <%=@yes_count%>%<div class="bar" style="width: <%=@yes_count.to_i%>%"></div>
+        </div>
+        <div class="progress progress-danger">
+          <%=@no_count%>%<div class="bar" style="width: <%=@no_count.to_i%>%"></div>
+        </div>
+        <div class="progress progress-warning">
+          <%=@cant_say_count%>%<div class="bar" style="width: <%=@cant_say_count.to_i%>%"></div>
+        </div>
+      <%end%>  
+    </div>
   </div>
 </div>  
 <div class="clearfix"></div>

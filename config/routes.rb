@@ -18,6 +18,7 @@ ShameIndia::Application.routes.draw do
   match "/postings/:posting_id/add_like" => "postings#add_like", :as => 'add_like'
   #match "/polls/:posting_id/add_like" => "postings#add_like", :as => 'add_like'
   match "/polls/:poll_id/create_poll_answer" => "polls#create_poll_answer", :as => "create_poll_answer", :method=> :put 
+  
   resources :activities
   root :to => "postings#index"
   match "auth/:provider/callback" => 'sessions#create'

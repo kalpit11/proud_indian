@@ -13,13 +13,27 @@ class PostingsController < ApplicationController
     else
       @postings = Posting.order("created_at desc")
     end
+
     @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(5)
     @poll = Poll.where(:dated=>Date.today)[0]
-    @poll_answer = @poll.poll_answers.new
+    
+    if @poll
+      @poll_answer = @poll.poll_answers.new
+    end
+    
+    @previous_poll=Poll.where(:dated=>Date.today-1)[0]
+    if @previous_poll
+      @total_count = @previous_poll.poll_answers.count
+      @yes_count = (@previous_poll.poll_answers.where(:answer=>"Yes").count/@total_count.to_f)*100
+      @no_count = (@previous_poll.poll_answers.where(:answer=>"No").count/@total_count.to_f)*100
+      @cant_say_count = (@previous_poll.poll_answers.where(:answer=>"Cant_Say").count/@total_count.to_f)*100
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @postings }
     end
+
   end
 
   # GET /postings/1

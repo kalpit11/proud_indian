@@ -6,4 +6,11 @@ class PollsController < ApplicationController
       redirect_to postings_path
     end
 	end
+
+	def create
+		@poll=Poll.new(params[:poll])
+		if @poll.save
+			redirect_to postings_path
+		end
+	end
 end
