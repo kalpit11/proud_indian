@@ -30,7 +30,9 @@
         <ul class="thumbnails">
           <div class="span1">
             <%img=User.where(:id => posting.user_id)[0]%>
-            <%= image_tag(img.image_url)%>
+            <%if img.image_url%>
+              <%= image_tag(img.image_url)%>
+            <%end%>
             <h6><%= posting.user_name%></h6>
           </div>  
           <div class="span10">
