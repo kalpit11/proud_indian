@@ -1,9 +1,11 @@
 ShameIndia::Application.routes.draw do
    
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-
-
-
+  devise_scope :user do
+    get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
+    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
     #devise_for :users
   #match "/texting"  => "postings#texting"   
   resources :postings do
@@ -15,7 +17,8 @@ ShameIndia::Application.routes.draw do
    end
 
   match "/postings/:posting_id/comments" => "comments#create", :as => 'create_comment'
-  match "/postings/:posting_id/add_like" => "postings#add_like", :as => 'add_like'
+  match "/postings/:posting_id/add_post_like" => "postings#add_post_like", :as => 'add_post_like'
+  match "/postings/:posting_id/add_post_unlike" => "postings#add_post_unlike", :as => 'add_post_unlike'
   #match "/polls/:posting_id/add_like" => "postings#add_like", :as => 'add_like'
   match "/polls/:poll_id/create_poll_answer" => "polls#create_poll_answer", :as => "create_poll_answer", :method=> :put 
   

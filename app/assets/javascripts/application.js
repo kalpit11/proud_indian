@@ -19,6 +19,8 @@
 
 $(document).ready(function() {
 
+  $("textarea").autosize();
+	
 	// $(".comment").hide();
 	// $(".commit_submit").click(function(){
 	//    $(".comment").toggle();
@@ -26,7 +28,8 @@ $(document).ready(function() {
 	$(".new_comment").bind('ajax:success',function(evt, data, status, xhr){
 			var data_id = $(this).find('input[type=submit]').data("id");
 			console.log("success");
-			$("."+data_id).children(".new_comment").before(data).fadeIn("slow");	
+			$("."+data_id).children(".new_comment").before(data).fadeIn("slow");
+			$(".new_comment_text_area").val("");	
 		}).bind("ajax:error",function() {
 
 	});

@@ -1,15 +1,7 @@
 class ApplicationController < ActionController::Base
 	include PublicActivity::StoreController
   protect_from_forgery
-  helper_method :current_user
+  before_filter :authenticate_user!
 
-	private
-
-	def current_user
-		if session[:user_id]
-	  	@current_user ||= User.find(session[:user_id])
-	  else
-	  	@current_user ||= nil
-	  end
-	end
+	
 end

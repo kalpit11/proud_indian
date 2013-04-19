@@ -21,7 +21,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem 'devise'
+gem "omniauth-google-oauth2"
 gem 'carrierwave'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -35,7 +36,7 @@ gem "unicorn"
 gem "heroku"
 gem 'kaminari'
 gem "nested_form"
-
+gem 'geocoder'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

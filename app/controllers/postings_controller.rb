@@ -71,6 +71,9 @@ class PostingsController < ApplicationController
 
     respond_to do |format|
       if @posting.save
+        User.all.each do |u|
+          PostMailer.new_post(@posting,u).deliver
+        end
         @posting.create_activity :create, owner: current_user
         format.html { redirect_to root_url, notice: 'Posting was successfully created.' }
         format.json { render json: @posting, status: :created, location: @posting }
@@ -110,11 +113,20 @@ class PostingsController < ApplicationController
     end
   end
 
-  def add_like
+  def add_post_like
     @posting = Posting.find(params[:posting_id])
     @post_like = @posting.post_likes.new(:user_id=>current_user.id,:user_name=>current_user.name,:posting_id=>params[:posting_id])
     if @post_like.save
       @post_like.create_activity :create, owner: current_user
+      redirect_to postings_path
+    end
+  end
+
+  def add_post_unlike
+    @posting = Posting.find(params[:posting_id])
+    @post_unlike = @posting.post_unlikes.new(:user_id=>current_user.id,:user_name=>current_user.name,:posting_id=>params[:posting_id])
+    if @post_unlike.save
+      @post_unlike.create_activity :create, owner: current_user
       redirect_to postings_path
     end
   end
