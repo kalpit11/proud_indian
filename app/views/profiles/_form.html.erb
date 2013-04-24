@@ -1,0 +1,18 @@
+<%= form_for(@profile,:url=>profile_path(@profile),:method=>:PUT) do |f| %>
+	<div >
+		<div class="span3">
+			<%= f.label :name%>
+			<%= f.text_field :name%>
+			<%= f.label :email%>
+			<%= f.text_field :email%>
+			<%= f.label :address%>
+			<%= f.text_field :address%><br>
+			<%= f.submit "Save", :class=>"btn btn-success"%>
+		</div>
+		<div class="span3">
+			<%= image_tag(@profile.image)%><br>
+			<%= f.label :image,"Upload new image"%>
+			<%= f.file_field :image %>
+		</div>
+	</div>
+<%end%>

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :poll_answers
   has_many :comments
   has_many :post_likes
+  has_one :profile,:dependent=>:destroy
   mount_uploader :image, AvatarUploader
   def email_required?
   false
@@ -19,7 +20,6 @@ class User < ActiveRecord::Base
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
 	  user = User.where(:provider => auth.provider, :uid => auth.uid).first
 	  unless user
-	  	binding.pry
 	  	temp = Tempfile.new([auth["uid"], ".jpg"])
     	temp.binmode
     	temp.write(open(auth["info"]["image"]).read)
@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
 	                         password:Devise.friendly_token[0,20],
 	                         image:temp	                         
 	                         )
+	    user.build_profile(name:user.name,email:user.email,image:temp)
+	    user.profile.save
 	  end
 	  user
 	end
@@ -37,7 +39,6 @@ class User < ActiveRecord::Base
 
 	  user = User.where(:provider => auth.provider, :uid => auth.uid).first
 	  unless user
-	  	binding.pry
 	    temp = Tempfile.new([auth["uid"], ".jpg"])
     	temp.binmode
     	temp.write(open(auth["info"]["image"]).read)
@@ -48,22 +49,17 @@ class User < ActiveRecord::Base
 	                         password:Devise.friendly_token[0,20],
 	                         image:temp	                         
 	                         )
+			user.build_profile(name:user.name,image:temp)
+	    user.profile.save	  
 	  end
 	  user
 	end
-	def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
+
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.where(:email => data["email"]).first
 
     unless user
-    	binding.pry
     	temp = Tempfile.new([access_token[:uid], ".jpg"])
     	temp.binmode
     	temp.write(open(data['image']).read)
@@ -74,6 +70,8 @@ class User < ActiveRecord::Base
 	    		   password:Devise.friendly_token[0,20],
 	    		   image:temp
 	    		  )
+    	user.build_profile(name:user.name,email:user.email,image:temp)
+	    user.profile.save
     end
     user
 	end

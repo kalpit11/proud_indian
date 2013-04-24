@@ -1,8 +1,13 @@
-<div class="new_edit_posting">
-	<h1>Editing posting</h1>
 
-	<%= render 'form' %>
+<div class="row-fluid page">
+	<div class="span9">
+		<h1>Edit posting</h1>
 
-	<%= link_to 'Show', @posting %> |
-	<%= link_to 'Back', postings_path %>
+		<%= render 'form' %>
+
+		<%= link_to 'Back', postings_path %>
+	</div>
+	<div class='side-bar span3 fixed' style="margin-left:1%;">
+    <%= render 'side_bar'%>
+  </div>
 </div>

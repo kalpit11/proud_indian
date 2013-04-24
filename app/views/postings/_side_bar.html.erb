@@ -1,0 +1,33 @@
+<div class="recent-activities">
+      <%= paginate @activities%>
+      <% @activities.each do |activity| %>
+      <%= activity.owner.name if activity.owner %>
+      <%= render_activity activity %>
+      <% end %>
+    </div>
+    <%if current_user%>
+      <%if @poll%>  
+        <%if @poll.poll_answers.select{|c| c.user_id == current_user.id}.empty?%>  
+          <div class="polling">
+            <%#binding.pry%>
+            <hr>
+            <%= render :partial => "poll_answer",:locals => {:poll => @poll,:poll_answer => @poll_answer } %>
+          </div>
+        <%end%>
+      <%end%>
+    <%end%>  
+    <div class="poll-result">
+      <%if @previous_poll%>
+        <hr>
+        Yesterday's Poll result:<br>
+        <div class="progress progress-success">
+          <%=@yes_count%>%<div class="bar" style="width: <%#=@yes_count.to_i%>%"></div>
+        </div>
+        <div class="progress progress-danger">
+          <%=@no_count%>%<div class="bar" style="width: <%#=@no_count.to_i%>%"></div>
+        </div>
+        <div class="progress progress-warning">
+          <%=@cant_say_count%>%<div class="bar" style="width: <%#=@cant_say_count.to_i%>%"></div>
+        </div>
+      <%end%>
+    </div>

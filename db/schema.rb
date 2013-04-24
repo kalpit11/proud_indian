@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419084852) do
+ActiveRecord::Schema.define(:version => 20130420103138) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -106,6 +106,16 @@ ActiveRecord::Schema.define(:version => 20130419084852) do
     t.float    "longitude"
     t.float    "latitude"
     t.text     "address"
+  end
+
+  create_table "profiles", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "address"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "image"
   end
 
   create_table "users", :force => true do |t|

@@ -14,6 +14,17 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_utils (1.0.5)
+      activesupport (>= 2.3.11)
+      i18n
+    activemerchant (1.32.1)
+      active_utils (>= 1.0.2)
+      activesupport (>= 2.3.14)
+      builder (>= 2.0.0)
+      i18n
+      json (>= 1.5.1)
+      money
+      nokogiri
     activemodel (3.2.12)
       activesupport (= 3.2.12)
       builder (~> 3.0.0)
@@ -93,10 +104,13 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.22)
+    money (5.1.1)
+      i18n (~> 0.6.0)
     multi_json (1.7.2)
     multipart-post (1.2.0)
     nested_form (0.3.1)
     netrc (0.7.7)
+    nokogiri (1.5.9)
     oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -197,6 +211,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemerchant
   bootstrap-sass
   carrierwave
   coffee-rails (~> 3.2.1)

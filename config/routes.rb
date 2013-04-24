@@ -12,6 +12,8 @@ ShameIndia::Application.routes.draw do
     
     resources :comments
   end
+  resources :profiles
+  
    resources :polls do
     resources :poll_answers 
    end
@@ -21,7 +23,7 @@ ShameIndia::Application.routes.draw do
   match "/postings/:posting_id/add_post_unlike" => "postings#add_post_unlike", :as => 'add_post_unlike'
   #match "/polls/:posting_id/add_like" => "postings#add_like", :as => 'add_like'
   match "/polls/:poll_id/create_poll_answer" => "polls#create_poll_answer", :as => "create_poll_answer", :method=> :put 
-  
+
   resources :activities
   root :to => "postings#index"
   match "auth/:provider/callback" => 'sessions#create'

@@ -1,6 +1,6 @@
 @import "bootstrap";
 body{
-  /*background-image:url("bg1.jpg");*/
+  background-image: url(image_path('bj4.jpg'));
 }
 
 .tip{
@@ -10,9 +10,10 @@ body{
   max-height: 500px;
 }
 .page{
-	margin-left: 1%;
-  margin-top: 2%;
-   margin-bottom: 4%;
+  width: 78%;
+  margin-left: 10%;
+  margin-top: 4%;
+  
 }
 #footer {
   height: 60px;
@@ -23,9 +24,9 @@ body{
 }
 
 .main-area{
+  background-color: white;
   border-right: solid 1px;
   border-left: solid 1px;
-  border-color: ghostwhite;
   padding-left: 20px;
   box-shadow: #777 0 0 5px;
   padding-bottom: 1%;
@@ -42,10 +43,7 @@ body{
 .side-bar{
 	margin-top: 25px;
 }
-.new_edit_posting{
-  margin-top: 4%;
-  margin-left: 1%;
-}
+
 .comment-area{
   background-color: ghostwhite;
 box-shadow: rgb(0, 0, 0) 0 0 2px;
@@ -58,7 +56,29 @@ padding-top: 1%;
 .post-area{
   margin-top: 4%;
 }
-/*.side-bar{
-  margin-left: 1%;
-  padding-right: 0%;
-}*/
+.side-bar{
+  background-color:#ffffff;
+  
+  opacity:0.8;
+}
+.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+background-color: red;
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#115e7b), to(#0b3c4e));
+background-image: -webkit-linear-gradient(top, #3e5872 0%,#6896c4 100%);
+
+}
+
+.navbar .nav > li > a {
+color: #fff;
+text-decoration: none;
+display: block;
+padding: 9px;
+text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+ .heading{
+       background-color: #0b3c4e;
+       padding: 1%;
+ font-size: 18px;
+ color: white;
+}
+

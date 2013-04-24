@@ -47,6 +47,13 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         @comment.create_activity :create, owner: current_user
+        # User.find(@posting.user_id)
+        #   PostMailer.new_comment(User.find(@posting.user_id),@post).deliver
+        # user=@posting.comments.all.collect {|x| x.user_id}.collect{|a|User.find(a)}
+        # user.all.each do |u|
+        #   PostMailer.new_comment(u,@posting)
+        # end
+        #@comment.create_activity :create, owner: current_user
         #format.html { redirect_to root_url, notice: 'Comment was successfully created.' }
         format.js
       else

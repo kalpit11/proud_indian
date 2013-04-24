@@ -1,5 +1,8 @@
 Unlikes 
 
 <% if activity.trackable %>
+  <%posting = Posting.find(activity.trackable.posting_id)%>
   <b><%=activity.trackable.posting.caption%></b><br>
+
+  <%= image_tag(posting.pictures.first.image_url,:size=>'100x100')%><br><br><br>
 <% end %>

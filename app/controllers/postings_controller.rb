@@ -5,9 +5,8 @@ class PostingsController < ApplicationController
   # def texting
   #   render :text => "I'm just printing a dummy text"
   # end
-    
+    skip_before_filter :authenticate_user!
   def index
-    #binding.pry
     if params[:search] 
       @postings = Posting.where(:caption=>params[:search][:caption])
     else
@@ -28,7 +27,12 @@ class PostingsController < ApplicationController
       @no_count = (@previous_poll.poll_answers.where(:answer=>"No").count/@total_count.to_f)*100
       @cant_say_count = (@previous_poll.poll_answers.where(:answer=>"Cant_Say").count/@total_count.to_f)*100
     end
-    
+    if current_user
+       @profile = current_user.profile
+      # if @profile = nil
+      #   @profile = Profile.new
+      # end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @postings }
@@ -50,8 +54,9 @@ class PostingsController < ApplicationController
   # GET /postings/new
   # GET /postings/new.json
   def new
+    #binding.pry
     @posting = Posting.new
-
+    @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(5)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @posting }
@@ -60,6 +65,7 @@ class PostingsController < ApplicationController
 
   # GET /postings/1/edit
   def edit
+    @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(5)
     @posting = Posting.find(params[:id])
   end
 
@@ -131,7 +137,4 @@ class PostingsController < ApplicationController
     end
   end
 
-  def update_poll
-
-  end
 end

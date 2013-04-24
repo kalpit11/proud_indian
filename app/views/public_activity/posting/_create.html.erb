@@ -1,4 +1,5 @@
 added a post
 <% if activity.trackable %>
 <b><%=activity.trackable.caption%></b><br>
+<%= image_tag(activity.trackable.pictures.first.image_url,:size=>'100x100')%><br><br><br>
 <% end %>

@@ -19,7 +19,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
+gem 'activemerchant'
 gem 'jquery-rails'
 gem 'devise'
 gem "omniauth-google-oauth2"
