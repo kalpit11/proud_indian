@@ -50,10 +50,11 @@ border-radius: 5px;
 }
 
 .comment-area{
-  background-color: ghostwhite;
+  background-color: rgb(248, 248, 248);;
 box-shadow: rgb(0, 0, 0) 0 0 2px;
 padding-left: 1%;
 padding-top: 1%;
+border-radius: 5px;
 }
 .new-comment{
   padding-top: 1%;
@@ -69,7 +70,7 @@ padding-top: 1%;
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
 background-color: red;
 background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#115e7b), to(#0b3c4e));
-background-image: -webkit-linear-gradient(top, #0b3c4e 0%, #115e7b 100%);
+background-image: -webkit-linear-gradient(top, #3e5872 0%,#6896c4 100%);
 
 }
 
@@ -81,7 +82,7 @@ padding: 9px;
 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
 }
  .heading{
-       background-color: rgb(0, 77, 138);
+       background-color: #0b3c4e;
        padding: 1%;
  font-size: 18px;
  color: white;

@@ -1,103 +1,136 @@
-<hr style="margin-left: -1%;margin-right: 1%;">
-<div id="post_<%=@posting.id%>" class="post-area">
-  <ul class="thumbnails">
-    <div class="span1">
-      <%img=User.where(:id => @posting.user_id)[0]%>
-      <%if img.image_url%>
-        <%= image_tag(img.profile.image_url)%>
-      <%end%>
-      <h6><%= @posting.user_name%></h6>
-    </div>  
-    <div class="span8">
-      <h3><%= link_to @posting.caption, posting_path(@posting)%></h3>
-      <%@pictures = @posting.pictures%>
-      <%@pictures.each do |picture|%>
-        <li class="span4">
-          <div class="thumbnail">
-            <a href="#picture_view-<%=@posting.id%>" data-toggle="modal"><%= image_tag(picture.image_url,:style=>"width:300px;height:200px;")%></a>
-          </div>
-        </li>
-      <%end%>
-      <li class="span12"><p style="color: gray;"><%= @posting.post%></p></li>
-    </div>  
-    <%if current_user%>
-      <%if current_user.id==@posting.user_id%>
-        <div class="span2">
-          <a href="#map" data-toggle="modal"><%= @posting.address%>&nbsp;&nbsp;&nbsp;</a>
-           
-          <!-- Modal -->
-          <div id="map" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class='row-fluid page'>
+  <div class='span9 main-area'>
+
+    <div class="clearfix"></div>
+    <div id="post_<%=@posting.id%>" class="post-area">
+        <ul class="thumbnails">
+          <div class="span1">
+            <%img=User.where(:id => @posting.user_id)[0]%>
+            <%if img.image_url%>
+              <%= image_tag(img.profile.image_url)%>
+            <%end%>
+            <h6><%= @posting.user_name%></h6>
+          </div>  
+          <div class="span8">
+            <h3><%= link_to @posting.caption, posting_path(@posting)%></h3>
+            <%i=0%>
+            <%@pictures = @posting.pictures%>
+            <%@pictures.each do |picture|%>
+              <li class="span5">
+                <div class="thumbnail">
+                  <a href="#picture_view-<%=@posting.id%>" data-toggle="modal"><%= image_tag(picture.image_url,:style=>"width:300px;height:200px;margin-bottom: 1%;")%></a>
+                </div>
+              </li>
+              <%if i>=3%>
+                <%break%>
+              <%end%>
+              <%i=i+1%>
+            <%end%> 
+            <li class="span12"><p style="color: gray;"><%= @posting.post%></p></li>
+            <li class='span12' style='color:gray;'><%=@posting.pictures.count%> images</li>
+          </div>  
+          <div class="span2">    
+            <a href="#map" data-toggle="modal" title="Click here to see map"  onclick="initialize(<%=@posting.latitude%>,<%=@posting.longitude%>)"><%= @posting.address%>&nbsp;&nbsp;&nbsp;</a>
+             
+            <!-- Modal -->
+            <div id="map" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Location</h3>
+              </div>
+              <div class="modal-body">
+                <div id="map_canvas"></div>
+              </div>
+            </div>
+            </div>
+          <%if current_user%>
+            <%if current_user.id==@posting.user_id%>
+              <div class="span1">  
+                  <%= link_to image_tag("edit.png",:size=>"10x16"),edit_posting_path(@posting)%>
+                  <%= link_to image_tag("delete.png",:size=>"10x16"),posting_path(@posting), :method =>:delete%>
+              </div>
+            <%end%>  
+          <%end%>
+                    <!-- Modal -->
+          <div id="picture_view-<%=@posting.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel">Location</h3>
+              <h3 id="myModalLabel-<%=@posting.id%>"><%=@posting.caption%></h3>
             </div>
             <div class="modal-body">
-              <p><%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@posting.latitude}%2C#{@posting.longitude}" %></p>
+              <div id="myCarousel-<%=@posting.id%>" class="carousel slide">
+              <!-- Carousel items -->
+              <%i=0%>
+              <div class="carousel-inner">
+                <%@pictures = @posting.pictures%>
+                <%@pictures.each do |picture|%>
+                  <%if i==0%>
+                    <div class="item active"><%= image_tag(picture.image_url,:style=>"width:600px;height:400px;")%></div>
+                  <%else%>
+                    <div class="item"><%= image_tag(picture.image_url,:style=>"width:600px;height:400px;")%></div>
+                  <%end%>
+                  <%i=i+1%>
+                <%end%>
+              </div>
+              <!-- Carousel nav -->
+              <a class="carousel-control left" href="#myCarousel-<%=@posting.id%>" data-slide="prev">&lsaquo;</a>
+              <a class="carousel-control right" href="#myCarousel-<%=@posting.id%>" data-slide="next">&rsaquo;</a>
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
           </div>
-
-          
-        </div>
-        <div class="span1">  
-            <%= link_to image_tag("edit.png",:size=>"10x16"),edit_posting_path(@posting)%>
-            <%= link_to image_tag("delete.png",:size=>"10x16"),posting_path(@posting), :method =>:delete%>
-        </div>
-      <%end%>  
-    <%end%>
-              <!-- Modal -->
-    <div id="picture_view-<%=@posting.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel-<%=@posting.id%>"><%=@posting.caption%></h3>
+          <!-- end of model -->
+          <div class="clearfix"></div>         
+        </ul>
+        <%#binding.pry%>
       </div>
-      <div class="modal-body">
-        <div id="myCarousel-<%=@posting.id%>" class="carousel slide">
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-          <%@pictures = @posting.pictures%>
-          <%@pictures.each do |picture|%>
-            <div class="item"><%= image_tag(picture.image_url,:style=>"width:600px;height:400px;")%></div>
+      <div class="share-area offset1">
+        <%if current_user%>
+          <b class="like"><%=@posting.post_likes.count%></b>
+          <%if @posting.post_likes.select{|c|c.user_id == current_user.id}.empty?%>
+            <%= link_to image_tag("like.ico",:size=>"30x20"),add_post_like_path(@posting),:class=>"like_post"%>
+          <%else%>
+            <a href="#"><%=image_tag("like.ico",:size=>"30x20")%></a>
           <%end%>
-        </div>
-        <!-- Carousel nav -->
-        <a class="carousel-control left" href="#myCarousel-<%=@posting.id%>" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#myCarousel-<%=@posting.id%>" data-slide="next">&rsaquo;</a>
+          &nbsp;
+          <b class="unlike"><%=@posting.post_unlikes.count%></b>
+          <%if @posting.post_likes.select{|c|c.user_id == current_user.id}.empty?%>
+            <%= link_to image_tag("unlike.ico",:size=>"30x20"),add_post_unlike_path(@posting),:class=>"like_post"%>
+          <%else%>
+            <a href="#"><%=image_tag("unlike.ico",:size=>"30x20")%></a>
+          <%end%>
+          <%#binding.pry%>
+          <a href="#" onclick='postToFeed("<%=@posting.caption%>","<%=@posting.post%>","<%=@posting.pictures[0].image_url.to_s%>"); return false;' data-id="<%=@posting.id%>"><%=image_tag("fb1.png",:size=>"30x20")%></a>&nbsp;
+          <%= link_to image_tag("twitter1.png",:size=>"30x20"), "http://twitter.com/home?status=#{@posting.caption} See complete story on http://proudindian.herokuapp.com/"%>&nbsp;
+          <a href='javascript:void(0);'
+      class="g-interactivepost"
+      data-contenturl="https://plus.google.com/pages/"
+      data-contentdeeplinkid="/pages"
+      data-clientid="1074459897240-mn7aaf5jkmpk6o60o650ehm0mmvmn99u.apps.googleusercontent.com"
+      data-cookiepolicy="http://localhost:3000/"
+      data-prefilltext="Engage your users today, create a Google+ page for your business."
+      data-calltoactionlabel="CREATE"
+      data-calltoactionurl="http://plus.google.com/pages/create"
+      data-calltoactiondeeplinkid="/pages/create">
+      <%= image_tag("googleplus.png",:size=>"30x20")%>
+    </a>&nbsp;&nbsp;
+          <a href="javascript:void(0);" class="comment_button" data-id='<%=@posting.id%>'><%= image_tag("comment.png",:size=>"30x20")%></a>
+        <%end%>
+      </div>    
+      <br>
+      <div class='span10 offset1 comment-area-<%=@posting.id%> comment-area'>
+       
+        <%= render :partial => "comments/comment_section",:collection => @posting.comments , :as => :comment,:locals => {:posting => @posting } %>
+        <%if current_user%>
+           <%= render :partial => "new_comment",:locals => {:posting => @posting } %>
+        <%end%>
       </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      </div>
-    </div>
-    <!-- end of model -->
-    <div class="clearfix"></div>         
-  </ul>
-  <%#binding.pry%>
-</div>
-<div class="share-area offset1">
-  <%if current_user%>
-    <b class="like"><%=@posting.post_likes.count%></b>
-    <%if @posting.post_likes.select{|c|c.user_id == current_user.id}.empty?%>
-      <%= link_to image_tag("like.ico",:size=>"30x20"),add_post_like_path(@posting),:class=>"like_post"%>
-    <%else%>
-      <a href="#"><%=image_tag("like.ico",:size=>"30x20")%></a>
-    <%end%>
-    &nbsp;
-    <b class="unlike"><%=@posting.post_unlikes.count%></b>
-    <%if @posting.post_likes.select{|c|c.user_id == current_user.id}.empty?%>
-      <%= link_to image_tag("unlike.ico",:size=>"30x20"),add_post_unlike_path(@posting),:class=>"like_post"%>
-    <%else%>
-      <a href="#"><%=image_tag("unlike.ico",:size=>"30x20")%></a>
-    <%end%>
 
-    <a href="#" onclick='postToFeed("<%=@posting.caption%>","<%=@posting.post%>","<%=@posting.pictures[0].image_url.to_s%>"); return false;' data-id="<%=@posting.id%>"><%=image_tag("fb1.png",:size=>"30x20")%></a>&nbsp;
-    <%= link_to image_tag("twitter1.png",:size=>"30x20"), "http://twitter.com/home?status=#{@posting.caption} See complete story on http://proudindian.herokuapp.com/"%>
-  <%end%>
-</div>    
-<br>
-<div class='span10 offset1 comment-area-<%=@posting.id%> comment-area'>
- 
-  <%= render :partial => "comments/comment_section",:collection => @posting.comments , :as => :comment,:locals => {:posting => @posting } %>
-  <%if current_user%>
-     <%= render :partial => "new_comment",:locals => {:posting => @posting } %>
-  <%end%>
-</div>   
+  </div>  
+  <div class='side-bar span3 fixed' style="margin-left:1%;">
+    <%= render 'side_bar'%>
+  </div>
+</div>
+<div class="clearfix"></div>

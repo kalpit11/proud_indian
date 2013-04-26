@@ -100,8 +100,8 @@
       <%end%>
       <%#binding.pry%>
       <a href="#" onclick='postToFeed("<%=posting.caption%>","<%=posting.post%>","<%=posting.pictures[0].image_url.to_s%>"); return false;' data-id="<%=posting.id%>"><%=image_tag("fb1.png",:size=>"30x20")%></a>&nbsp;
-      <%= link_to image_tag("twitter1.png",:size=>"30x20"), "http://twitter.com/home?status=#{posting.caption} See complete story on http://proudindian.herokuapp.com/"%>
-      <button
+      <%= link_to image_tag("twitter1.png",:size=>"30x20"), "http://twitter.com/home?status=#{posting.caption} See complete story on http://proudindian.herokuapp.com/"%>&nbsp;
+      <a href='javascript:void(0);'
   class="g-interactivepost"
   data-contenturl="https://plus.google.com/pages/"
   data-contentdeeplinkid="/pages"
@@ -111,9 +111,9 @@
   data-calltoactionlabel="CREATE"
   data-calltoactionurl="http://plus.google.com/pages/create"
   data-calltoactiondeeplinkid="/pages/create">
-  Tell your friends
-</button>
-      <a href="javascript:void(0);" class="comment_button" data-id='<%=posting.id%>'>Comment</a>
+  <%= image_tag("googleplus.png",:size=>"30x20")%>
+</a>&nbsp;&nbsp;
+      <a href="javascript:void(0);" class="comment_button" data-id='<%=posting.id%>'><%= image_tag("comment.png",:size=>"30x20")%></a>
     <%end%>
   </div>    
   <br>

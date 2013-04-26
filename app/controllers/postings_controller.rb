@@ -44,7 +44,7 @@ class PostingsController < ApplicationController
   # GET /postings/1.json
   def show
     @posting = Posting.find(params[:id])
-
+    @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(5)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @posting }
