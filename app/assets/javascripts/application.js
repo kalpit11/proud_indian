@@ -21,7 +21,7 @@ $(document).ready(function() {
 
   $("textarea").autosize();
 	
-	// $(".comment").hide();
+	 $(".comment-area").hide();
 	// $(".commit_submit").click(function(){
 	//    $(".comment").toggle();
 	//  });
@@ -52,8 +52,9 @@ $(document).ready(function() {
 			
 	});
 	
-  $('a#comment').click(function(){
-	    $(this).parent().siblings(".comment-area").toggle("slow");
+  $('a.comment_button').click(function(){
+  		var data_id = $(this).data('id');
+	    $(this).parent().siblings('.comment-area-'+data_id).toggle("slow");
 	  });
   
 })

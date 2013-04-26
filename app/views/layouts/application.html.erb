@@ -5,11 +5,13 @@
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+    </script>
   <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
   <script type="text/javascript">stLight.options({publisher: "0d7bdf41-6d77-4204-8ba4-dc93a9941c33", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
   <script src='http://connect.facebook.net/en_US/all.js'></script>
   <script src='https://raw.github.com/jackmoore/autosize/master/jquery.autosize.js'></script>
-
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
   <script> 
     FB.init({appId: "140476016130992", status: true, cookie: true});
     function postToFeed(capt,post,url) {
@@ -29,7 +31,32 @@
     }
   </script>
 
-
+<script type="text/javascript">
+  function initialize(lat,lan) {
+    var latlng = new google.maps.LatLng(lat,lan);
+    
+    var myOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    var myMarker = new google.maps.Marker({
+  position: latlng,
+  map: map,
+  title:"Location"
+  });
+    mymarker.setMap(map);
+  }
+</script>
+<script type="text/javascript">
+  (function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/client:plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ })();
+</script>
   </head>
   <body>
     
@@ -122,6 +149,10 @@
        <%= render "devise/sessions/sign_in" %>   
       </div>
     </div>
-  
+  <footer class="footer">
+    <div class='container'>
+      <p> Designed and built by <a href='www.paramtech.com'>ParamTech</a></p>
+    </div>
+  </footer>
   </body>
 </html>

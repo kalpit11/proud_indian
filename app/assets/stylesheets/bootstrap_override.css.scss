@@ -10,8 +10,8 @@ body{
   max-height: 500px;
 }
 .page{
-  width: 78%;
-  margin-left: 10%;
+  width: 91%;
+  margin-left: 5%;
   margin-top: 4%;
   
 }
@@ -41,7 +41,12 @@ body{
 }
 
 .side-bar{
-	margin-top: 25px;
+	margin-left: 1%;
+margin-top: 0%;
+padding: 1%;
+width: 23%;
+box-shadow: rgb(0, 0, 0) 0 0 2px;
+border-radius: 5px;
 }
 
 .comment-area{
@@ -64,7 +69,7 @@ padding-top: 1%;
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
 background-color: red;
 background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#115e7b), to(#0b3c4e));
-background-image: -webkit-linear-gradient(top, #3e5872 0%,#6896c4 100%);
+background-image: -webkit-linear-gradient(top, #0b3c4e 0%, #115e7b 100%);
 
 }
 
@@ -76,9 +81,43 @@ padding: 9px;
 text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
 }
  .heading{
-       background-color: #0b3c4e;
+       background-color: rgb(0, 77, 138);
        padding: 1%;
  font-size: 18px;
  color: white;
 }
 
+.new_post_area{
+  background-color: white;
+padding: 1% 2% 1% 2%;
+
+box-shadow: rgb(0, 0, 0) 0 0 5px;
+border-radius: 5px;
+
+}
+.profile_area{
+  background-color: white;
+padding: 1% 2% 1% 2%;
+
+box-shadow: rgb(0, 0, 0) 0 0 5px;
+border-radius: 5px;
+
+}
+
+.terms{
+  margin-left: 0%;
+margin-top: 1%;
+box-shadow: black 0 0 2px;
+}
+.footer{
+  text-align: center;
+padding: 30px 0;
+margin-top: 70px;
+border-top: 1px solid rgb(199, 195, 195);
+background-color: rgb(226, 225, 225);
+}
+
+#map_canvas {
+  width: 500px;
+  height: 400px;
+}

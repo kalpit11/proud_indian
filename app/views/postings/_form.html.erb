@@ -41,6 +41,7 @@
       <%=f.hidden_field :post_on, :value=>Time.now%>
       <div class="actions">
         <%= f.submit :class=>'btn btn-success' %>
+        <%= link_to 'Back', postings_path, :class=>'btn'%>
       </div>
     <% end %>
 <%end%>

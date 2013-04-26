@@ -13,9 +13,9 @@
         <%i=0%>
         <%@pictures = posting.pictures%>
         <%@pictures.each do |picture|%>
-          <li class="span4">
+          <li class="span5">
             <div class="thumbnail">
-              <a href="#picture_view-<%=posting.id%>" data-toggle="modal"><%= image_tag(picture.image_url,:style=>"width:300px;height:200px;")%></a>
+              <a href="#picture_view-<%=posting.id%>" data-toggle="modal"><%= image_tag(picture.image_url,:style=>"width:300px;height:200px;margin-bottom: 1%;")%></a>
             </div>
           </li>
           <%if i>=3%>
@@ -26,25 +26,22 @@
         <li class="span12"><p style="color: gray;"><%= posting.post%></p></li>
         <li class='span12' style='color:gray;'><%=posting.pictures.count%> images</li>
       </div>  
+      <div class="span2">    
+        <a href="#map" data-toggle="modal" title="Click here to see map"  onclick="initialize(<%=posting.latitude%>,<%=posting.longitude%>)"><%= posting.address%>&nbsp;&nbsp;&nbsp;</a>
+         
+        <!-- Modal -->
+        <div id="map" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Location</h3>
+          </div>
+          <div class="modal-body">
+            <div id="map_canvas"></div>
+          </div>
+        </div>
+        </div>
       <%if current_user%>
         <%if current_user.id==posting.user_id%>
-          <div class="span2">
-            
-            <a href="#map" data-toggle="modal"><%= posting.address%>&nbsp;&nbsp;&nbsp;</a>
-             
-            <!-- Modal -->
-            <div id="map" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">Location</h3>
-              </div>
-              <div class="modal-body">
-                <p><%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{posting.latitude}%2C#{posting.longitude}" %></p>
-              </div>
-            </div>
-
-            
-          </div>
           <div class="span1">  
               <%= link_to image_tag("edit.png",:size=>"10x16"),edit_posting_path(posting)%>
               <%= link_to image_tag("delete.png",:size=>"10x16"),posting_path(posting), :method =>:delete%>
@@ -101,9 +98,22 @@
       <%else%>
         <a href="#"><%=image_tag("unlike.ico",:size=>"30x20")%></a>
       <%end%>
-
+      <%#binding.pry%>
       <a href="#" onclick='postToFeed("<%=posting.caption%>","<%=posting.post%>","<%=posting.pictures[0].image_url.to_s%>"); return false;' data-id="<%=posting.id%>"><%=image_tag("fb1.png",:size=>"30x20")%></a>&nbsp;
       <%= link_to image_tag("twitter1.png",:size=>"30x20"), "http://twitter.com/home?status=#{posting.caption} See complete story on http://proudindian.herokuapp.com/"%>
+      <button
+  class="g-interactivepost"
+  data-contenturl="https://plus.google.com/pages/"
+  data-contentdeeplinkid="/pages"
+  data-clientid="1074459897240-mn7aaf5jkmpk6o60o650ehm0mmvmn99u.apps.googleusercontent.com"
+  data-cookiepolicy="http://localhost:3000/"
+  data-prefilltext="Engage your users today, create a Google+ page for your business."
+  data-calltoactionlabel="CREATE"
+  data-calltoactionurl="http://plus.google.com/pages/create"
+  data-calltoactiondeeplinkid="/pages/create">
+  Tell your friends
+</button>
+      <a href="javascript:void(0);" class="comment_button" data-id='<%=posting.id%>'>Comment</a>
     <%end%>
   </div>    
   <br>
@@ -122,4 +132,5 @@
 $(function(){
   $('#popup1').popover('toggle');
 });
+      
 </script>

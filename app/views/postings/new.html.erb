@@ -1,11 +1,30 @@
 
 <div class="row-fluid page">
 	<div class="span9">
-		<h1>New posting</h1>
+		<div class="span12 new_post_area">
+			<h1>New posting</h1>
 
-		<%= render 'form' %>
+			<%= render 'form' %>
 
-		<%= link_to 'Back', postings_path %>
+			
+			
+		</div>
+		<div class='clearfix'></div>
+		<div class="span12 terms" style="margin-left:0%;">
+			<pre style='background-color:rgb(250, 250, 250);'>Google AdSense Online Terms of Service
+1.    Welcome to AdSense!
+Thanks for your interest in our search and advertising services (the “Services”)!  
+By using our Services, you agree to these terms (the “AdSense Terms”), the AdSense Program Policies and the Google Branding Guidelines  (collectively, the “Agreement”). If ever in conflict, to the extent of such conflict, the AdSense Terms will take precedence over any other terms of the Agreement.  Please read the Agreement carefully.
+As used in the Agreement, “you” or “publisher” means the individual or entity using the Services (and/or any individual, entity or successor entity, agency or network acting on your behalf), “we,” “us” or “Google” means Google Inc., and the “parties” means you and Google.  
+2.    Access to the Services; AdSense Accounts
+Your use of the Services is subject to your creation and our approval of an AdSense account (an “Account”).  We have the right to refuse or limit your access to the Services. By submitting an application to use the Services, if you are an individual, you represent that you are at least 18 years of age.  You may only have one Account.  
+By enrolling in AdSense, you permit Google to serve, as applicable, (i) advertisements and other content (“Ads”), (ii) Google search boxes and search results, and (iii) related search queries and other links to your websites, mobile applications, media players, mobile content, and/or other properties approved by Google (each individually a “Property”).  In addition, you grant Google the right to access, index and cache the Properties, or any portion thereof, including by automated means. Google may refuse to provide the Services to any Property.
+Any Property that is a software application and accesses our Services (a) may require preapproval by Google in writing, and (b) must comply with Google’s Software Principles.
+3.    Using our Services
+You may use our Services only as permitted by this Agreement and any applicable laws.  Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide.
+You may discontinue your use of any Service at any time by removing the relevant code from your Properties. 
+</pre>
+ </div>
 	</div>
 	<div class='side-bar span3 fixed' style="margin-left:1%;">
     <%= render 'side_bar'%>

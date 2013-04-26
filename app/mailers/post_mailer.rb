@@ -2,6 +2,7 @@ class PostMailer < ActionMailer::Base
   default :from => "ShameINdia.com"
 
   def new_post(post,user)
+    binding.pry
   	@user=user
   	@post=post
   	picture=@post.pictures.first
@@ -9,10 +10,11 @@ class PostMailer < ActionMailer::Base
     mail(:to => @user.email, :subject => "New Post")
   end
 
-  def new_comment(user,post)
+  def new_comment(user,commentor,post)
+    binding.pry
+  	@commentor=commentor
   	@user=user
-  	@post=post
-
-    mail(:to => @user.email, :subject => "New Post")
+    @post=post
+    mail(:to => @user.email, :subject => "New Comment")
   end
 end

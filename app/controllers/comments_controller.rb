@@ -46,7 +46,15 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        #binding.pry
         @comment.create_activity :create, owner: current_user
+        k=[]
+        @posting.comments.select("DISTINCT user_id").collect {|x| k<<x.user_id}
+        @commenter=User.find(k)
+        @commenter.each do |u|
+          PostMailer.new_comment(u,User.find(@comment.user_id),@posting)
+        end
+        PostMailer.new_comment(User.find(@posting.user_id),User.find(@comment.user_id),@posting)
         # User.find(@posting.user_id)
         #   PostMailer.new_comment(User.find(@posting.user_id),@post).deliver
         # user=@posting.comments.all.collect {|x| x.user_id}.collect{|a|User.find(a)}

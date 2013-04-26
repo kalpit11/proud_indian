@@ -1,4 +1,4 @@
-<%#=@user.name%>,<br/><br>
-
-<%#=@commenter.name%> has commented on your post 
-<b><%#= @post.caption%></b>
+<%=@user.name%>,<br/><br>
+<%=@commentor.name%> has commented on your post 
+<b><%= @post.caption%></b>
+<p><%#= link_to "View Post", posting_path(@post, :host => "localhost:3000") %></p>
