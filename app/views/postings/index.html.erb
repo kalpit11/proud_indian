@@ -1,6 +1,7 @@
 <div class='row-fluid page'>
   <div class='span9 main-area'>
-    <%= render 'posting_comment'%>
+  	<%= render :partial => 'posting_comment',:collection => @postings , :as => :posting %>
+    
   </div>  
   <div class='side-bar span3 fixed' style="margin-left:1%;">
     <%= render 'side_bar'%>
