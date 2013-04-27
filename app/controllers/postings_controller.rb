@@ -10,7 +10,7 @@ class PostingsController < ApplicationController
     if params[:search] 
       @postings = Posting.where(:caption=>params[:search][:caption])
     else
-      @postings = Posting.order("created_at desc")
+      @postings = Posting.order("created_at desc").page(params[:page]).per(2)
     end
 
     @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(5)
@@ -35,7 +35,7 @@ class PostingsController < ApplicationController
     end
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @postings }
+      format.js
     end
 
   end

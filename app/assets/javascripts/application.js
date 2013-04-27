@@ -56,6 +56,27 @@ $(document).ready(function() {
   		var data_id = $(this).data('id');
 	    $(this).parent().siblings('.comment-area-'+data_id).toggle("slow");
 	  });
-  
-})
+
+    $(".p").pagination({
+        items: 100,
+        itemsOnPage: 10,
+        cssStyle: 'light-theme'
+    });
+    $(".pagination").bind('ajax:success',function(evt, data, status, xhr){
+			$(this).replaceWith(data);
+		}).bind("ajax:error",function() {
+			
+	});
+    // $(".pagination a").click(function() {
+    // 	$.get(this.href,null,null,'script');
+    // return false;
+  //});
+  jQuery.ias({
+    container : '#post_paginate',
+    item: '.complete_post',
+    pagination: '#post_paginate .pagination',
+    next: '#post_paginate .next a',
+    loader: '<img src="https://raw.github.com/webcreate/infinite-ajax-scroll/master/dist/images/loader.gif"/>'
+});
+});
 
