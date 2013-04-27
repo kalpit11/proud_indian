@@ -15,7 +15,7 @@
         <%@pictures.each do |picture|%>
           <li class="span5">
             <div class="thumbnail">
-              <a href="#picture_view-<%=posting.id%>" data-toggle="modal"><%= image_tag(picture.image_url,:style=>"width:300px;height:200px;margin-bottom: 1%;")%></a>
+              <a href="#picture_view-<%=posting.id%>" data-toggle="modal"><%= image_tag("img.png","data-original"=>picture.image_url, :class=>'lazy',:style=>"width:300px;height:200px;margin-bottom: 1%;")%></a>
             </div>
           </li>
           <%if i>=3%>

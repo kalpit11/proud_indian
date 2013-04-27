@@ -18,7 +18,7 @@
 //= require_tree .
 
 $(document).ready(function() {
-
+	$("img.lazy").lazyload();
   $("textarea").autosize();
 	
 	 $(".comment-area").hide();
