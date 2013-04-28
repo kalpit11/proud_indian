@@ -23,9 +23,9 @@ class PostingsController < ApplicationController
     @previous_poll=Poll.where(:dated=>Date.today-1)[0]
     if @previous_poll
       @total_count = @previous_poll.poll_answers.count
-      @yes_count = (@previous_poll.poll_answers.where(:answer=>"Yes").count/@total_count.to_f)*100
-      @no_count = (@previous_poll.poll_answers.where(:answer=>"No").count/@total_count.to_f)*100
-      @cant_say_count = (@previous_poll.poll_answers.where(:answer=>"Cant_Say").count/@total_count.to_f)*100
+      @yes_count = ((@previous_poll.poll_answers.where(:answer=>"Yes").count/@total_count.to_f)*100).round(2)
+      @no_count = ((@previous_poll.poll_answers.where(:answer=>"No").count/@total_count.to_f)*100).round(2)
+      @cant_say_count = ((@previous_poll.poll_answers.where(:answer=>"Cant_Say").count/@total_count.to_f)*100).round(2)
     end
     if current_user
        @profile = current_user.profile

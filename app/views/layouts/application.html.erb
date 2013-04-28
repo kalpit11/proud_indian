@@ -37,7 +37,7 @@
   </script>
 
 <script type="text/javascript">
-  function initialize(lat,lan,id) {
+  function initialize(lat,lan) {
     var latlng = new google.maps.LatLng(lat,lan);
     
     var myOptions = {
@@ -100,11 +100,9 @@
         <ul class="nav pull-right">
           <li><%= form_tag(postings_path,:method=>:get,:class=>"navbar-form form-search") do%>
             <div class="input-append">
-      
-   
+            <%=text_field_tag "search[caption]",(params[:search].present? ? params[:search][:caption]: ''), :class=>"input-medium search-query span4", :placeholder=>"Search Post"%>
+            <button class="btn" type="button"><i class="icon-search"></i></button>
             
-        <%=text_field_tag "search[caption]",(params[:search].present? ? params[:search][:caption]: ''), :class=>"input-medium search-query", :placeholder=>"Search Post"%>
-        <span class="add-on"><i class="icon-search"></i></span>
            </div>
       <% end %></li>
         </ul>

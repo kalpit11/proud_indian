@@ -1,8 +1,11 @@
-<%=form_for @poll_answer,:url=>create_poll_answer_path(@poll),:remote=>true,:html => {:class=>"poll_form","data-type" => "html"} do |f|%>
-  <%= @poll.question%><br>
-  <%= f.hidden_field :user_id,:value => current_user.id%>
-  <%= f.radio_button :answer,"Yes"%>Yes<br>
-  <%= f.radio_button :answer,"No"%>No<br>
-  <%= f.radio_button :answer,"Cant_Say"%>Can't Say<br><br>
-  <%= f.submit "Submit"%>
-<%end%>
+<div class="poll">
+	<%=form_for @poll_answer,:url=>create_poll_answer_path(@poll),:remote=>true,:html => {:class=>"poll_form","data-type" => "html"} do |f|%>
+	<h3>Today's Poll</h3>
+	  <b><%= @poll.question%></b> <br>
+	  <%= f.hidden_field :user_id,:value => current_user.id%>
+	  <%= f.radio_button :answer,"Yes"%>Yes<br>
+	  <%= f.radio_button :answer,"No"%>No<br>
+	  <%= f.radio_button :answer,"Cant_Say"%>Can't Say<br><br>
+	  <%= f.submit "Vote", :class=>'btn btn-success'%>
+	<%end%>
+</div>
