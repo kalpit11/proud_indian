@@ -67,17 +67,18 @@ $(document).ready(function() {
 		}).bind("ajax:error",function() {
 			
 	});
+		
     // $(".pagination a").click(function() {
     // 	$.get(this.href,null,null,'script');
     // return false;
   //});
-  jQuery.ias({
-    container : '#post_paginate',
-    item: '.complete_post',
-    pagination: '#post_paginate .pagination',
-    next: '#post_paginate .next a',
-    loader: '<img src="https://raw.github.com/webcreate/infinite-ajax-scroll/master/dist/images/loader.gif"/>'
-});
+//   jQuery.ias({
+//     container : '#post_paginate',
+//     item: '.complete_post',
+//     pagination: '#post_paginate .pagination',
+//     next: '#post_paginate .next a',
+//     loader: '<img src="https://raw.github.com/webcreate/infinite-ajax-scroll/master/dist/images/loader.gif"/>'
+// });
 });
 
 

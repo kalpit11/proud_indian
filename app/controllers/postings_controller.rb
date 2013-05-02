@@ -5,7 +5,7 @@ class PostingsController < ApplicationController
   # def texting
   #   render :text => "I'm just printing a dummy text"
   # end
-    skip_before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!
   def index
     if params[:search] 
       @postings = Posting.where(:caption=>params[:search][:caption])

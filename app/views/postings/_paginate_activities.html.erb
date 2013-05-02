@@ -1,4 +1,4 @@
-<%= paginate @activities, :remote=>true%>
+<%= paginate @activities, :remote=>true, :window => 2%>
   <% @activities.each do |activity| %>
     <%= activity.owner.name if activity.owner %>
     <%= render_activity activity %>

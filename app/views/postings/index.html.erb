@@ -1,8 +1,8 @@
-<div class='row-fluid page'>
+<div class='row-fluid main-page'>
   <div class='span9 main-area' id='post_paginate'>
 
   	<%= render :partial => 'posting_comment',:collection => @postings , :as => :posting %>
-  	<%= paginate @postings%>  
+  	<%= paginate @postings, :window => 4%>  
   </div>  
   <div class='side-bar span3 fixed' style="margin-left:1%;">
     <%= render 'side_bar'%>

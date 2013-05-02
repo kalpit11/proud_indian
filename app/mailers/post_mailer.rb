@@ -2,7 +2,6 @@ class PostMailer < ActionMailer::Base
   default :from => "ShameINdia.com"
 
   def new_post(post,user)
-    binding.pry
   	@user=user
   	@post=post
   	picture=@post.pictures.first
@@ -11,7 +10,6 @@ class PostMailer < ActionMailer::Base
   end
 
   def new_comment(user,commentor,post)
-    binding.pry
   	@commentor=commentor
   	@user=user
     @post=post
