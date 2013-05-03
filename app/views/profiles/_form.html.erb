@@ -11,7 +11,12 @@
 			<%= link_to 'Back', postings_path, :class=>'btn'%>
 		</div>
 		<div class="offset1 span3">
-			<%= image_tag(@profile.image)%><br>
+			<%binding.pry%>
+			<%if @profile.image_url%>
+				<%= image_tag(@profile.image_url)%><br>
+			<%else%>
+				<%= image_tag "profile.png"%>
+			<%end%>	
 			<%= f.label :image,"Upload new image"%>
 			<%= f.file_field :image %>
 

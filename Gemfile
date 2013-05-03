@@ -25,7 +25,7 @@ gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'carrierwave'
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
 gem 'bootstrap-sass'
 gem 'jquery-ui-rails'

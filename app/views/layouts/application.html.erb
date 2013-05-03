@@ -73,9 +73,9 @@
           <ul class='nav'>
             <li class="dropdown">
               <%if current_user.name%>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style='background-color: transparent;'><%= current_user.name %></a>
               <%else%>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email%></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style='background-color: transparent;'><%= current_user.email%></a>
               <%end%>
               <ul class="dropdown-menu">
                 <li><%= link_to "LogOut",destroy_user_session_path%></li>
@@ -83,14 +83,30 @@
             </li>
           </ul>
         <%else%>
-          <%= link_to image_tag('facebook-login.png',:size=>'30x30'), user_omniauth_authorize_path(:facebook) %>
+          <%= link_to image_tag('facebook-login.png',:size=>'30x30'), user_omniauth_authorize_path(:facebook),:style=>"margin-left: -60%;" %>
           <%= link_to image_tag('google-plus-logo.png',:size=>'30x30'), user_omniauth_authorize_path(:google_oauth2) %>
           <%= link_to image_tag('twitter-login.png',:size=>'30x30'), user_omniauth_authorize_path(:twitter) %>
-          <a href="#sign_in" data-toggle="modal" class='btn btn-success'>Log in</a>
-          
+          <div class="login-nav">
+            <ul>
+              <li id="login">
+                <a id="login-trigger" href="#">
+                  Log in <span>▼</span>
+                </a>
+                <div id="login-content">
+                  <%= render "devise/sessions/sign_in" %> 
+                </div>                     
+              </li>
+              <li id="signup">
+                <a href="#sign_up" data-toggle="modal">Sign up</a>
+              </li>
+            </ul>
+          </div>
         <%end%>
       </div>
     </div>
+
+
+
     <div class="navbar navbar-static-top">
       <div class="navbar-inner">
         
